@@ -68,6 +68,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
   padding: 4px 8px; line-height: 1; border-radius: 6px;
 }
 .menu-btn:active { background: rgba(255,255,255,0.1); }
+.title-actions { display: flex; align-items: center; gap: 2px; }
 
 .tabs { display: flex; gap: 0; }
 .tab {
@@ -541,6 +542,124 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .workout-row .ti { font-size: 16px; flex-shrink: 0; min-width: 22px; }
 .workout-row .ex { color: #f0e6ff; }
 
+.workout-list-item {
+  width: 100%; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-left: 3px solid #e8f84a;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.workout-list-item:active { background: rgba(255,255,255,0.09); }
+.workout-list-item-main { flex: 1; min-width: 0; }
+.workout-list-item-title {
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px;
+  font-size: 16px; color: #fff;
+}
+.workout-list-item-note {
+  font-size: 12px; color: #c8a8e8; margin-top: 4px;
+}
+.workout-list-item-chev { color: #c8a8e8; font-size: 22px; line-height: 1; }
+.workout-back-btn {
+  background: transparent; border: none; color: #d4baeb;
+  font-size: 14px; padding: 6px 0; margin: 0 0 8px;
+  font-family: 'DM Sans', sans-serif;
+}
+.workout-back-btn:active { color: #fff; }
+
+.workout-start-btn {
+  width: 100%; padding: 14px; margin: 6px 0 14px;
+  background: #e8f84a; color: #1a0633;
+  border: none; border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 2px; font-size: 16px;
+}
+.workout-start-btn:active { transform: translateY(1px); }
+
+.workout-overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 30% 25%, #4a1480 0%, #1a0633 55%, #0d031f 100%);
+  z-index: 200;
+  display: flex; flex-direction: column;
+  padding: calc(36px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));
+  gap: 14px; overflow: hidden;
+}
+.workout-overlay.is-paused::after {
+  content: "PAUSED"; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(13,3,31,0.55);
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 6px;
+  font-size: 36px; color: #fff; pointer-events: none;
+}
+.workout-overlay .workout-top { display: flex; justify-content: center; }
+.workout-overlay .workout-section-name {
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px;
+  color: #c8a8e8; font-size: 14px;
+}
+.workout-overlay .workout-move-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: #fff;
+  letter-spacing: 1px; line-height: 1.1;
+  text-align: center; padding: 6px 0;
+}
+.workout-overlay .workout-move-name.is-rest-move { color: #38bdf8; }
+.workout-overlay .workout-countdown {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; justify-content: center; gap: 4px;
+}
+.workout-overlay .workout-sec {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(160px, 48vw, 220px); line-height: 1;
+}
+.workout-overlay .workout-countdown.work .workout-sec { color: #e8f84a; }
+.workout-overlay .workout-countdown.rest .workout-sec { color: #38bdf8; }
+.workout-overlay .workout-phase {
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px;
+  font-size: 18px;
+}
+.workout-overlay .workout-countdown.work .workout-phase { color: #e8f84a; }
+.workout-overlay .workout-countdown.rest .workout-phase { color: #38bdf8; }
+.workout-overlay .workout-progress {
+  width: 100%; height: 6px; background: rgba(255,255,255,0.08);
+  border-radius: 3px; overflow: hidden;
+}
+.workout-overlay .workout-progress .workout-progress-bar { height: 100%; transition: width 0.18s linear; }
+.workout-overlay .workout-progress.work .workout-progress-bar { background: #e8f84a; }
+.workout-overlay .workout-progress.rest .workout-progress-bar { background: #38bdf8; }
+.workout-overlay .workout-next {
+  color: #c8a8e8; font-size: 14px;
+  text-align: center; padding: 4px 0;
+  line-height: 1.25;
+}
+.workout-overlay .workout-next strong { color: #fff; font-weight: 600; }
+.workout-overlay.is-rest-phase .workout-next {
+  font-size: 18px; padding: 10px 0;
+}
+.workout-overlay.is-rest-phase .workout-next strong {
+  display: block; margin-top: 6px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px; letter-spacing: 1px;
+  font-weight: 400;
+}
+.workout-overlay .workout-controls { display: flex; gap: 8px; }
+.workout-overlay .workout-controls button {
+  flex: 1; padding: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #f0e6ff;
+  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 14px;
+}
+.workout-overlay .workout-end-btn {
+  padding: 12px; background: transparent;
+  border: 1px solid rgba(255,87,119,0.4); color: #ff5577;
+  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 13px;
+}
+
 .backup-banner {
   margin: 14px 20px 0;
   background: linear-gradient(90deg, rgba(232,248,74,0.22), rgba(232,248,74,0.10));
@@ -587,8 +706,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 <div class="menu-sheet" id="menuSheet">
   <div class="menu-sheet-inner">
     <div class="menu-handle"></div>
-    <button class="menu-item" id="workoutBtn"><span class="menu-icon">⏱️</span>Workout #1</button>
-    <button class="menu-item" id="workoutPlanBtn"><span class="menu-icon">💪</span>Strength Exercises</button>
     <button class="menu-item" id="settingsBtn"><span class="menu-icon">⚙</span>Bodyweight <span id="weightDisplay" style="color:#666; margin-left:auto;"></span></button>
     <button class="menu-item" id="exportBtn"><span class="menu-icon">⬇</span>Export sessions (JSON)</button>
     <button class="menu-item" id="importBtn"><span class="menu-icon">⬆</span>Import sessions (JSON)</button>
@@ -684,21 +801,66 @@ const MET_DEFAULTS = { Walk: 3.5, Pilates: 4.5, Yoga: 4.0, Run: 10, Strength: 5,
 const RPE_LABEL = ["", "Very Easy", "Easy", "Moderate", "Moderate", "Hard", "Hard", "Very Hard", "Very Hard", "Max", "Max"];
 const STORAGE_KEY = "leigh-training-log:sessions";
 const SETTINGS_KEY = "leigh-training-log:settings";
-const APP_VERSION = "0.43";  // bump this on every deploy so you can verify the right file is live
+const APP_VERSION = "0.45";  // bump this on every deploy so you can verify the right file is live
 
 // Structured workouts — rendered first in the Strength Exercises sheet.
 // To update: edit this constant and redeploy.
 const WORKOUTS = [
   {
     icon: "⏱️",
-    title: "40 min HIIT",
+    title: "Full Body (40mins)",
     note: "45s on · 15s off · 40 moves",
+    met: 6.65,
     sections: [
       { title: "Cardio", moves: ["Boxing", "Jumping jacks", "Lateral Shuffle", "Mountain Climbers", "High Knees", "Boxing", "Burpees", "Rest"] },
       { title: "Legs",   moves: ["Wall sit", "Squat", "Step ups", "Squat pulse", "Walking Lunges", "Calf raises", "Squat", "Rest"] },
       { title: "Upper",  moves: ["Boxing", "Push-ups", "Dips", "Plank shoulder taps", "Pushup", "Mountain Climbers", "Boxing", "Rest"] },
       { title: "Glutes", moves: ["RS knee-ankle taps", "RS Leg Raises", "RS Circles", "LS knee-ankle taps", "LS Leg Raises", "LS Circles", "Glute Bridge", "Rest"] },
       { title: "Abs",    moves: ["Flutterkicks", "Bicycle", "Russian Twists", "Ankle taps", "Side plank R", "Side Plank L", "High plank", "Crunches"] },
+    ],
+  },
+  {
+    icon: "❤️",
+    title: "Cardio (24mins)",
+    note: "45s on · 15s off · 24 moves",
+    met: 6.65,
+    sections: [
+      { title: "Set 1", moves: ["Burpees", "Boxing", "Mountain Climbers", "Jumping Jacks", "Lateral Shuffle", "Burpees", "High Knees", "Rest"] },
+      { title: "Set 2", moves: ["Star Jumps", "Squat Jumps", "Lateral Shuffle", "Mountain Climbers", "Boxing", "Burpees", "High Knees", "Rest"] },
+      { title: "Set 3", moves: ["Flutter Kicks", "Bicycle Crunch", "Russian Twists", "Heel Taps", "Mountain Climbers", "Side Plank R", "Side Plank L", "Plank"] },
+    ],
+  },
+  {
+    icon: "🦵",
+    title: "Lower (24mins)",
+    note: "45s on · 15s off · 24 moves",
+    met: 6.65,
+    sections: [
+      { title: "Set 1", moves: ["Squat", "Walking Lunges", "Squat Pulse", "Step Ups", "Reverse Lunge", "Calf Raises", "Wall Sit", "Rest"] },
+      { title: "Set 2", moves: ["RS Heel Knee Tap", "RS Leg Raises", "RS Leg Circles", "LS Heel Knee Tap", "LS Leg Raises", "LS Leg Circles", "Glute Bridge", "Rest"] },
+      { title: "Set 3", moves: ["Plank", "Bicycle Crunch", "Flutter Kicks", "Heel Taps", "Russian Twists", "Crunches", "Plank", "Wall Sit"] },
+    ],
+  },
+  {
+    icon: "🔥",
+    title: "Core (24mins)",
+    note: "45s on · 15s off · 24 moves",
+    met: 6.65,
+    sections: [
+      { title: "Set 1", moves: ["Plank", "Bicycle Crunch", "Russian Twists", "Flutter Kicks", "Heel Taps", "Crunches", "Plank", "Rest"] },
+      { title: "Set 2", moves: ["Side Plank R", "Side Plank L", "Dead Bug", "V-Sit Hold", "Mountain Climbers", "Low Plank", "Heel Taps", "Rest"] },
+      { title: "Set 3", moves: ["Push-Ups", "Plank Shoulder Taps", "Dips", "Mountain Climbers", "Boxing", "Push-Ups", "Superman Hold", "Plank"] },
+    ],
+  },
+  {
+    icon: "💪",
+    title: "Upper (24mins)",
+    note: "45s on · 15s off · 24 moves",
+    met: 6.65,
+    sections: [
+      { title: "Set 1", moves: ["Push-Ups", "Boxing", "Dips", "Burpees", "Supermans", "YTW", "Boxing", "Rest"] },
+      { title: "Set 2", moves: ["Superman Hold", "Bear Crawl Hold", "Plank Shoulder Taps", "Inchworm", "Push-Ups", "Boxing", "Dips", "Rest"] },
+      { title: "Set 3", moves: ["Plank", "Bicycle Crunch", "Russian Twists", "Flutter Kicks", "Heel Taps", "Side Plank R", "Side Plank L", "Plank"] },
     ],
   },
 ];
@@ -777,6 +939,8 @@ const state = {
   historyMetric: "minutes",  // "minutes" | "calories"
   allTimeGranularity: "month",  // "month" | "week" — only used in All Time mode
   editingId: null,  // id of the history session currently being edited, or null
+  workoutTimer: null,  // when active: { workoutIdx, totalMoves, startedAt, totalPausedMs, pausedAt }
+  workoutDetailIdx: null,  // which workout's detail is open in the sheet; null = list view
   form: emptyForm("Walk"),
   date: todayISO(),
   saved: false,
@@ -1225,11 +1389,15 @@ function calcCalories(discipline, duration, distance, splitStr) {
 function render() {
   const app = document.getElementById("app");
   const banner = shouldShowBackupBanner() ? renderBackupBanner() : "";
-  app.innerHTML = `
+  const workoutOverlay = renderWorkoutOverlay();
+  app.innerHTML = workoutOverlay + `
     <div class="header">
       <div class="title">
         <span>TRACKR</span>
-        <button class="menu-btn" id="openMenu" aria-label="Menu">⋯</button>
+        <div class="title-actions">
+          <button class="menu-btn" id="openWorkouts" aria-label="Workouts">⏱</button>
+          <button class="menu-btn" id="openMenu" aria-label="Menu">⋯</button>
+        </div>
       </div>
       <div class="title-meta">${state.sessions.length} session${state.sessions.length === 1 ? "" : "s"} tracked <span style="opacity:0.5; margin-left:6px;">v${APP_VERSION}</span></div>
       <div class="tabs" role="tablist">
@@ -1972,6 +2140,13 @@ function attachHandlers() {
     document.getElementById("weightDisplay").textContent = state.weight + "kg";
     document.getElementById("menuSheet").classList.add("open");
   });
+  // Workouts shortcut (⏱) — always opens to the list view.
+  const openWorkouts = document.getElementById("openWorkouts");
+  if (openWorkouts) openWorkouts.addEventListener("click", () => {
+    state.workoutDetailIdx = null;
+    renderWorkoutPlan("workout");
+    document.getElementById("workoutSheet").classList.add("open");
+  });
 
   // Backup banner
   const backupBtn = document.getElementById("backupNowBtn");
@@ -2060,46 +2235,282 @@ function renderRestoreSheet() {
   });
 }
 
+// ---------- Active Workout Timer ----------
+let workoutTickHandle = null;
+let workoutWakeLock = null;
+let workoutLastVibKey = "";
+let workoutAudioCtx = null;
+let workoutFiredBeeps = new Set();
+
+function ensureAudioCtx() {
+  if (workoutAudioCtx) return workoutAudioCtx;
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  try { workoutAudioCtx = new Ctx(); } catch (e) { return null; }
+  return workoutAudioCtx;
+}
+// Default gain at 0.8 lets the iOS media volume / side rocker do most of the
+// scaling. Anything higher than ~0.9 clips on some devices.
+function playBeep(freq, durationMs, volume = 0.8) {
+  const ctx = workoutAudioCtx;
+  if (!ctx) return;
+  // iOS uses "suspended" and "interrupted" — resume() is a no-op when
+  // already running, so we can call it unconditionally and avoid a race
+  // where the first beep after returning from background goes silent.
+  if (ctx.state !== "running") ctx.resume().catch(() => {});
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.type = "sine"; osc.frequency.value = freq;
+  const t0 = ctx.currentTime;
+  const t1 = t0 + durationMs / 1000;
+  gain.gain.setValueAtTime(0, t0);
+  gain.gain.linearRampToValueAtTime(volume, t0 + 0.008);
+  gain.gain.setValueAtTime(volume, t1 - 0.02);
+  gain.gain.linearRampToValueAtTime(0, t1);
+  osc.start(t0); osc.stop(t1);
+}
+
+function flattenWorkout(workout) {
+  const flat = [];
+  workout.sections.forEach(sec => sec.moves.forEach(move => flat.push({ section: sec.title, move })));
+  return flat;
+}
+function computeWorkoutState() {
+  const t = state.workoutTimer;
+  if (!t) return null;
+  const totalMoves = t.totalMoves || 40;
+  const now = t.pausedAt || Date.now();
+  const elapsedMs = now - t.startedAt - t.totalPausedMs;
+  const elapsedSec = elapsedMs / 1000;
+  const moveIdx = Math.floor(elapsedSec / 60);
+  if (moveIdx >= totalMoves) return { done: true, moveIdx: totalMoves, elapsedSec };
+  const intoMove = elapsedSec % 60;
+  const phase = intoMove < 45 ? "work" : "rest";
+  const phaseDur = phase === "work" ? 45 : 15;
+  const phaseElapsed = phase === "work" ? intoMove : intoMove - 45;
+  return {
+    done: false, moveIdx, phase,
+    phaseRemaining: Math.max(0, Math.ceil(phaseDur - phaseElapsed)),
+    phasePct: (phaseElapsed / phaseDur) * 100,
+    elapsedSec,
+  };
+}
+async function acquireWorkoutWakeLock() {
+  if (!("wakeLock" in navigator)) return;
+  try {
+    workoutWakeLock = await navigator.wakeLock.request("screen");
+    workoutWakeLock.addEventListener("release", () => { workoutWakeLock = null; });
+  } catch (e) {}
+}
+function releaseWorkoutWakeLock() {
+  if (workoutWakeLock) { try { workoutWakeLock.release(); } catch (e) {} workoutWakeLock = null; }
+}
+// When iOS suspends our tab, both wake lock and AudioContext get released.
+// Re-acquire both whenever we come back to the foreground during an active workout.
+document.addEventListener("visibilitychange", () => {
+  if (!state.workoutTimer) return;
+  if (document.visibilityState !== "visible") return;
+  if (!workoutWakeLock) acquireWorkoutWakeLock();
+  const ctx = workoutAudioCtx;
+  if (ctx && ctx.state !== "running") ctx.resume().catch(() => {});
+});
+function startWorkout(workoutIdx = 0) {
+  const workout = WORKOUTS[workoutIdx];
+  if (!workout) return;
+  const totalMoves = workout.sections.reduce((a, s) => a + s.moves.length, 0);
+  state.workoutTimer = {
+    workoutIdx, totalMoves,
+    startedAt: Date.now(), totalPausedMs: 0, pausedAt: null,
+  };
+  workoutLastVibKey = "0-work";
+  workoutFiredBeeps = new Set();
+  acquireWorkoutWakeLock();
+  ensureAudioCtx();
+  playBeep(1200, 450);            // GO
+  navigator.vibrate?.([60, 60, 60]);
+  document.getElementById("workoutSheet").classList.remove("open");
+  scheduleWorkoutTick();
+  render();
+}
+function pauseWorkout() {
+  if (!state.workoutTimer || state.workoutTimer.pausedAt) return;
+  state.workoutTimer.pausedAt = Date.now();
+  render();
+}
+function resumeWorkout() {
+  const t = state.workoutTimer;
+  if (!t || !t.pausedAt) return;
+  t.totalPausedMs += Date.now() - t.pausedAt;
+  t.pausedAt = null;
+  render();
+}
+function skipWorkoutMove() {
+  const t = state.workoutTimer; if (!t) return;
+  const c = computeWorkoutState(); if (!c || c.done) return;
+  const newElapsedMs = (c.moveIdx + 1) * 60 * 1000;
+  const ref = t.pausedAt || Date.now();
+  t.startedAt = ref - t.totalPausedMs - newElapsedMs;
+  navigator.vibrate?.(60);
+  render();
+}
+function logWorkoutSession(elapsedMin, completed) {
+  if (elapsedMin < 5) return false;
+  const t = state.workoutTimer || {};
+  const workout = WORKOUTS[t.workoutIdx] || WORKOUTS[0];
+  const totalMoves = t.totalMoves || 40;
+  const finalMin = Math.min(totalMoves, elapsedMin);
+  const met = workout.met || MET_DEFAULTS.Strength || 5;
+  const weight = state.weight || 94;
+  const calories = String(Math.round(met * weight * (finalMin / 60)));
+  state.sessions.push({
+    id: uid(), date: todayISO(), discipline: "Strength",
+    data: {
+      duration: String(finalMin),
+      type: workout.title,
+      details: completed
+        ? `Completed all ${totalMoves} moves · 45s on / 15s off`
+        : `Ended at move ${Math.min(totalMoves, elapsedMin)} of ${totalMoves}`,
+      calories,
+    },
+  });
+  saveSessions();
+  return true;
+}
+function finishWorkout() {
+  if (!state.workoutTimer) return;
+  const totalMoves = state.workoutTimer.totalMoves || 40;
+  const c = computeWorkoutState();
+  const elapsedMin = c ? Math.round(c.elapsedSec / 60) : totalMoves;
+  const logged = logWorkoutSession(elapsedMin, true);
+  navigator.vibrate?.([240, 100, 240, 100, 320]);
+  cleanupWorkout();
+  if (logged) showToast(`Workout complete · ${Math.min(totalMoves, elapsedMin)}-min Strength logged`);
+}
+function endWorkout() {
+  if (!state.workoutTimer) return;
+  const c = computeWorkoutState();
+  const elapsedMin = c ? Math.max(0, Math.round(c.elapsedSec / 60)) : 0;
+  let logged = false;
+  if (elapsedMin >= 5) {
+    if (confirm(`End workout? Log ${elapsedMin}-minute Strength session?`)) {
+      logged = logWorkoutSession(elapsedMin, false);
+    }
+  }
+  cleanupWorkout();
+  if (logged) showToast(`Logged ${elapsedMin}-min Strength session`);
+}
+function cleanupWorkout() {
+  state.workoutTimer = null;
+  workoutLastVibKey = "";
+  workoutFiredBeeps = new Set();
+  if (workoutTickHandle) { clearInterval(workoutTickHandle); workoutTickHandle = null; }
+  releaseWorkoutWakeLock();
+  render();
+}
+function scheduleWorkoutTick() {
+  if (workoutTickHandle) clearInterval(workoutTickHandle);
+  workoutTickHandle = setInterval(() => {
+    if (!state.workoutTimer) { clearInterval(workoutTickHandle); workoutTickHandle = null; return; }
+    if (state.workoutTimer.pausedAt) return;
+    const c = computeWorkoutState();
+    if (c.done) { finishWorkout(); return; }
+
+    // Phase transitions get a long beep — higher pitch for new move, lower for work-end.
+    const vibKey = `${c.moveIdx}-${c.phase}`;
+    if (vibKey !== workoutLastVibKey) {
+      const isNewMove = c.phase === "work";
+      navigator.vibrate?.(isNewMove ? [80, 40, 120] : 50);
+      if (isNewMove) playBeep(1200, 450);
+      else           playBeep(900, 600);
+      workoutLastVibKey = vibKey;
+    }
+
+    // Two "bip" warnings at 58s and 59s of each 60s slot.
+    const intoMove = c.elapsedSec - c.moveIdx * 60;
+    if (intoMove >= 58 && intoMove < 59) {
+      const k = `bip1-${c.moveIdx}`;
+      if (!workoutFiredBeeps.has(k)) { workoutFiredBeeps.add(k); playBeep(800, 110); }
+    }
+    if (intoMove >= 59 && intoMove < 60) {
+      const k = `bip2-${c.moveIdx}`;
+      if (!workoutFiredBeeps.has(k)) { workoutFiredBeeps.add(k); playBeep(800, 110); }
+    }
+    render();
+  }, 250);
+}
+
+function renderWorkoutOverlay() {
+  if (!state.workoutTimer) return "";
+  const c = computeWorkoutState();
+  if (!c || c.done) return "";
+  const workout = WORKOUTS[state.workoutTimer.workoutIdx] || WORKOUTS[0];
+  const flat = flattenWorkout(workout);
+  const current = flat[c.moveIdx];
+  const next = flat[c.moveIdx + 1];
+  const isPaused = !!state.workoutTimer.pausedAt;
+  const isRestSlot = current.move.toLowerCase() === "rest";
+  const phaseClass = (c.phase === "work" && !isRestSlot) ? "work" : "rest";
+  const phaseLabel = (c.phase === "work" && !isRestSlot) ? "GO" : "REST";
+  return `
+    <div class="workout-overlay ${isPaused ? "is-paused" : ""} ${phaseClass === "rest" ? "is-rest-phase" : ""}">
+      <div class="workout-top">
+        <div class="workout-section-name">${current.section} · ${c.moveIdx + 1} / ${flat.length}</div>
+      </div>
+      <div class="workout-move-name ${isRestSlot ? "is-rest-move" : ""}">${escapeHtml(current.move)}</div>
+      <div class="workout-countdown ${phaseClass}">
+        <div class="workout-sec">${c.phaseRemaining}</div>
+        <div class="workout-phase">${phaseLabel}</div>
+      </div>
+      <div class="workout-progress ${phaseClass}">
+        <div class="workout-progress-bar" style="width:${c.phasePct}%;"></div>
+      </div>
+      <div class="workout-next">
+        ${next ? `Next: <strong>${escapeHtml(next.move)}</strong>` : `Last one — finish strong!`}
+      </div>
+      <div class="workout-controls">
+        <button data-workout-action="${isPaused ? "resume" : "pause"}">${isPaused ? "RESUME" : "PAUSE"}</button>
+        <button data-workout-action="skip">SKIP ›</button>
+      </div>
+      <button class="workout-end-btn" data-workout-action="end">END WORKOUT</button>
+    </div>
+  `;
+}
+
 function renderWorkoutPlan(mode) {
-  // mode: "workout" -> show only structured workouts;
-  //       "exercises" -> show only the exercise reference bank.
+  // Sheet hosts three views, all reached via state.workoutDetailIdx:
+  //   null         → list of all workouts + Strength Exercises row
+  //   number       → that workout's detail (sections + START)
+  //   "exercises"  → strength-exercises reference bank
   const titleEl = document.querySelector("#workoutSheet .workout-title");
   let content = "";
-  if (mode === "workout") {
-    if (titleEl) titleEl.textContent = "Workout #1";
-    content = WORKOUTS.map(w => {
-      const sections = w.sections.map(sec => {
-        const moves = sec.moves.map((name, i) => {
-          const isRest = name.toLowerCase() === "rest";
-          return `
-            <div class="workout-step ${isRest ? "is-rest" : ""}">
-              <span class="step-num">${i + 1}</span>
-              <span class="move">${escapeHtml(name)}</span>
-            </div>
-          `;
-        }).join("");
-        return `
-          <div class="workout-section">
-            <div class="workout-section-title">${escapeHtml(sec.title)}</div>
-            ${moves}
-          </div>
-        `;
-      }).join("");
-      return `
-        <div class="workout-card is-workout">
-          <div class="workout-card-head">
-            <div class="workout-card-name">${w.icon} ${escapeHtml(w.title)}</div>
-            ${w.note ? `<div class="workout-card-weeks">${escapeHtml(w.note)}</div>` : ""}
-          </div>
-          ${sections}
+  const detailIdx = state.workoutDetailIdx;
+
+  if (detailIdx === null || detailIdx === undefined) {
+    if (titleEl) titleEl.textContent = "Workouts";
+    content = WORKOUTS.map((w, idx) => `
+      <button class="workout-list-item" data-workout-detail="${idx}">
+        <div class="workout-list-item-main">
+          <div class="workout-list-item-title">${w.icon} ${escapeHtml(w.title)}</div>
+          ${w.note ? `<div class="workout-list-item-note">${escapeHtml(w.note)}</div>` : ""}
         </div>
-      `;
-    }).join("");
-  } else {
+        <div class="workout-list-item-chev">›</div>
+      </button>
+    `).join("");
+    content += `
+      <button class="workout-list-item" data-workout-detail="exercises">
+        <div class="workout-list-item-main">
+          <div class="workout-list-item-title">💪 Strength Exercises</div>
+          <div class="workout-list-item-note">Reference bank · 73 exercises</div>
+        </div>
+        <div class="workout-list-item-chev">›</div>
+      </button>
+    `;
+  } else if (detailIdx === "exercises") {
     if (titleEl) titleEl.textContent = "Strength Exercises";
     const legend = `
       <div class="workout-legend">
-        <span><span class="ti">🏋️</span> Weights</span>
+        <span><span class="ti">🏋️‍♀️</span> Weights</span>
         <span><span class="ti">💪</span> Bodyweight</span>
       </div>
     `;
@@ -2120,7 +2531,38 @@ function renderWorkoutPlan(mode) {
         </div>
       `;
     }).join("");
-    content = legend + cards;
+    content = `<button class="workout-back-btn" data-workout-back>‹ All workouts</button>` + legend + cards;
+  } else {
+    if (titleEl) titleEl.textContent = "Workouts";
+    const w = WORKOUTS[detailIdx] || WORKOUTS[0];
+    const sections = w.sections.map(sec => {
+      const moves = sec.moves.map((name, i) => {
+        const isRest = name.toLowerCase() === "rest";
+        return `
+          <div class="workout-step ${isRest ? "is-rest" : ""}">
+            <span class="step-num">${i + 1}</span>
+            <span class="move">${escapeHtml(name)}</span>
+          </div>
+        `;
+      }).join("");
+      return `
+        <div class="workout-section">
+          <div class="workout-section-title">${escapeHtml(sec.title)}</div>
+          ${moves}
+        </div>
+      `;
+    }).join("");
+    content = `
+      <button class="workout-back-btn" data-workout-back>‹ All workouts</button>
+      <div class="workout-card is-workout">
+        <div class="workout-card-head">
+          <div class="workout-card-name">${w.icon} ${escapeHtml(w.title)}</div>
+          ${w.note ? `<div class="workout-card-weeks">${escapeHtml(w.note)}</div>` : ""}
+        </div>
+        <button class="workout-start-btn" data-workout-start="${detailIdx}">▶ START WORKOUT</button>
+        ${sections}
+      </div>
+    `;
   }
   document.getElementById("workoutContent").innerHTML = content;
 }
@@ -2218,16 +2660,6 @@ function setupMenu() {
   });
   attachSheetSwipe(document.getElementById("restoreSheet"), document.querySelector("#restoreSheet .workout-sheet-inner"));
 
-  document.getElementById("workoutBtn").addEventListener("click", () => {
-    renderWorkoutPlan("workout");
-    sheet.classList.remove("open");
-    document.getElementById("workoutSheet").classList.add("open");
-  });
-  document.getElementById("workoutPlanBtn").addEventListener("click", () => {
-    renderWorkoutPlan("exercises");
-    sheet.classList.remove("open");
-    document.getElementById("workoutSheet").classList.add("open");
-  });
   document.getElementById("closeWorkoutBtn").addEventListener("click", () => {
     document.getElementById("workoutSheet").classList.remove("open");
   });
@@ -2333,6 +2765,35 @@ function showToast(msg) {
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 2000);
 }
+
+// Document-level click delegation for workout buttons — survives re-renders.
+document.addEventListener("click", e => {
+  const detailBtn = e.target.closest("[data-workout-detail]");
+  if (detailBtn) {
+    const raw = detailBtn.dataset.workoutDetail;
+    const n = parseInt(raw, 10);
+    state.workoutDetailIdx = isNaN(n) ? raw : n;
+    renderWorkoutPlan("workout");
+    return;
+  }
+  if (e.target.closest("[data-workout-back]")) {
+    state.workoutDetailIdx = null;
+    renderWorkoutPlan("workout");
+    return;
+  }
+  const startBtn = e.target.closest("[data-workout-start]");
+  if (startBtn) {
+    const idx = parseInt(startBtn.dataset.workoutStart, 10) || 0;
+    startWorkout(idx);
+    return;
+  }
+  const action = e.target.closest("[data-workout-action]")?.dataset.workoutAction;
+  if (!action) return;
+  if (action === "pause") pauseWorkout();
+  else if (action === "resume") resumeWorkout();
+  else if (action === "skip") skipWorkoutMove();
+  else if (action === "end") endWorkout();
+});
 
 // ---------- Boot ----------
 loadSettings();
