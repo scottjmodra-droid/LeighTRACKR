@@ -342,7 +342,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
   position: absolute; left: 0; right: 0; top: 50%;
   transform: translateY(-50%);
   text-align: center;
-  font-size: 9px; line-height: 1;
+  font-size: 11px; line-height: 1;
   color: #fff;
   font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.3px; font-weight: 700;
   text-shadow: 0 0 2px rgba(0,0,0,0.7), 0 0 3px rgba(0,0,0,0.5);
@@ -351,7 +351,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .daily-bar-total {
   position: absolute; left: -10px; right: -10px;
   text-align: center;
-  font-size: 10px; line-height: 1;
+  font-size: 13px; line-height: 1;
   color: #e8f84a;
   font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.5px;
   white-space: nowrap;
@@ -384,11 +384,11 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
   overflow: hidden;
 }
 .stat-value {
-  font-size: 26px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;
+  font-size: 34px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   line-height: 1.1;
 }
-.stat-label { font-size: 12px; color: #d4baeb; margin-top: 3px; }
+.stat-label { font-size: 13px; color: #d4baeb; margin-top: 3px; }
 
 .history-list { display: flex; flex-direction: column; gap: 8px; }
 .history-item {
@@ -860,7 +860,7 @@ const MET_DEFAULTS = { Walk: 3.5, Pilates: 4.5, Yoga: 4.0, Run: 10, Strength: 5,
 const RPE_LABEL = ["", "Very Easy", "Easy", "Moderate", "Moderate", "Hard", "Hard", "Very Hard", "Very Hard", "Max", "Max"];
 const STORAGE_KEY = "leigh-training-log:sessions";
 const SETTINGS_KEY = "leigh-training-log:settings";
-const APP_VERSION = "0.54";  // bump this on every deploy so you can verify the right file is live
+const APP_VERSION = "0.56";  // bump this on every deploy so you can verify the right file is live
 
 // Structured workouts — rendered first in the Strength Exercises sheet.
 // To update: edit this constant and redeploy.
