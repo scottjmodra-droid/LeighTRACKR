@@ -860,7 +860,7 @@ const MET_DEFAULTS = { Walk: 3.5, Pilates: 4.5, Yoga: 4.0, Run: 10, Strength: 5,
 const RPE_LABEL = ["", "Very Easy", "Easy", "Moderate", "Moderate", "Hard", "Hard", "Very Hard", "Very Hard", "Max", "Max"];
 const STORAGE_KEY = "leigh-training-log:sessions";
 const SETTINGS_KEY = "leigh-training-log:settings";
-const APP_VERSION = "0.58";  // bump this on every deploy so you can verify the right file is live
+const APP_VERSION = "0.59";  // bump this on every deploy so you can verify the right file is live
 
 // Structured workouts — rendered first in the Strength Exercises sheet.
 // To update: edit this constant and redeploy.
@@ -1699,12 +1699,12 @@ function renderMonthByDiscipline(period) {
     discSessions[s.discipline].push({ val, distance: parseFloat(s.data?.distance) || 0 });
   });
 
-  const activeDiscs = DISCIPLINES.filter(d => discSessions[d].length > 0);
+  const activeDiscs = DISCIPLINES;
   const discTotals  = {};
   activeDiscs.forEach(d => discTotals[d] = discSessions[d].reduce((s, x) => s + x.val, 0));
   const grandTotal  = activeDiscs.reduce((s, d) => s + discTotals[d], 0);
 
-  const rawMax = activeDiscs.length > 0 ? Math.max(...activeDiscs.map(d => discTotals[d])) : 0;
+  const rawMax = Math.max(...activeDiscs.map(d => discTotals[d]), 0);
 
   function pickStepMin(v) {
     if (v <= 180) return 30; if (v <= 360) return 60; if (v <= 720) return 120;
@@ -1733,9 +1733,7 @@ function renderMonthByDiscipline(period) {
   const DIST_DISCS = ["Walk", "Run"];
   const SEG_MIN_PX = 14;
 
-  const barsHTML = activeDiscs.length === 0
-    ? `<div style="color:#888;padding:20px;text-align:center;">No sessions this month</div>`
-    : activeDiscs.map(d => {
+  const barsHTML = activeDiscs.map(d => {
         const cfg = DISCIPLINE_CONFIG[d];
         const sessions = discSessions[d];
         const total = discTotals[d];
