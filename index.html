@@ -50,19 +50,24 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 }
 
 .header {
-  padding: calc(20px + env(safe-area-inset-top)) 20px 0;
+  padding: calc(12px + env(safe-area-inset-top)) 20px 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  letter-spacing: 2px;
-  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
-.title-meta { font-size: 14px; color: #d4baeb; margin-bottom: 16px; font-family: 'DM Sans', sans-serif; letter-spacing: 0; font-weight: 400; }
+.title-left { display: flex; flex-direction: column; gap: 1px; }
+.title-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #fff;
+  line-height: 1;
+}
+.title-meta { font-size: 11px; color: #d4baeb; font-family: 'DM Sans', sans-serif; letter-spacing: 0; font-weight: 400; }
 .menu-btn {
   background: transparent; border: none; color: #c8a8e8; font-size: 22px;
   padding: 4px 8px; line-height: 1; border-radius: 6px;
@@ -86,8 +91,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 20px;
 }
 .discipline-btn {
-  padding: 12px 4px; border: 2px solid transparent; border-radius: 10px;
-  transition: all 0.15s; min-height: 76px;
+  padding: 8px 4px; border: 2px solid transparent; border-radius: 10px;
+  transition: all 0.15s; min-height: 66px;
   color: #1a0633;
   /* background, border-color, and color set inline using discipline colour */
 }
@@ -105,7 +110,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.field { margin-bottom: 14px; }
+.field { margin-bottom: 8px; }
 .date-row {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr) 44px;
@@ -148,11 +153,11 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .date-day-badge.is-today { background: #e8f84a; color: #1a0633; }
 .field-label {
   font-size: 13px; color: #d4baeb; letter-spacing: 2px;
-  font-family: 'Bebas Neue', sans-serif; margin-bottom: 7px; display: block;
+  font-family: 'Bebas Neue', sans-serif; margin-bottom: 4px; display: block;
 }
 .input {
   width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
-  color: #fff; padding: 14px; font-size: 16px;
+  color: #fff; padding: 10px 14px; font-size: 16px;
   backdrop-filter: blur(8px);
 }
 .input:focus { border-color: #e8f84a; }
@@ -172,7 +177,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .computed-hint:active { color: #fff; }
 
 .save-btn {
-  width: 100%; margin-top: 24px; padding: 18px; border: none;
+  width: 100%; margin-top: 12px; padding: 14px; border: none;
   border-radius: 12px; font-size: 17px; font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 2.5px; color: #000; transition: all 0.3s;
 }
@@ -363,9 +368,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .daily-bar-label.today .dom { color: #e8f84a; }
 .daily-chart.dense .daily-bar-label .dow { font-size: 8px; }
 .daily-chart.dense .daily-bar-label .dom { font-size: 8px; }
-.weekly-legend { display: flex; gap: 14px; margin-top: 20px; flex-wrap: wrap; }
-.weekly-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #d4baeb; }
-.weekly-legend-swatch { width: 8px; height: 8px; border-radius: 2px; }
+.weekly-legend { display: flex; gap: 8px; margin-top: 20px; flex-wrap: nowrap; overflow: hidden; }
+.weekly-legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #d4baeb; white-space: nowrap; }
+.weekly-legend-swatch { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
 
 .stats-grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -598,12 +603,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .workout-overlay .workout-top { display: flex; justify-content: center; }
 .workout-overlay .workout-section-name {
   font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px;
-  color: #c8a8e8; font-size: 14px;
+  color: #c8a8e8; font-size: clamp(18px, 5vw, 24px);
 }
 .workout-overlay .workout-move-name {
-  font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: #fff;
-  letter-spacing: 1px; line-height: 1.1;
-  text-align: center; padding: 6px 0;
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 20vw, 96px); color: #fff;
+  letter-spacing: 1px; line-height: 1.05;
+  text-align: center; padding: 4px 0;
 }
 .workout-overlay .workout-move-name.is-rest-move { color: #38bdf8; }
 .workout-overlay .workout-countdown {
@@ -644,14 +649,14 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
 .workout-overlay .workout-next-last {
   font-size: 16px; color: #c8a8e8; font-style: italic;
 }
-/* UP NEXT block shown at the top during the 15s inter-exercise rest */
+/* UP NEXT block shown at the top during the 10s inter-exercise rest */
 .workout-overlay .workout-up-next-label {
   font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px;
-  font-size: 16px; color: #9684b8; text-align: center; margin-top: 4px;
+  font-size: clamp(22px, 6vw, 30px); color: #9684b8; text-align: center; margin-top: 4px;
 }
 .workout-overlay .workout-up-next-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(64px, 18vw, 88px); letter-spacing: 1px; line-height: 1.05;
+  font-size: clamp(72px, 20vw, 96px); letter-spacing: 1px; line-height: 1.05;
   color: #fff; text-align: center;
 }
 /* View workout button */
@@ -855,66 +860,66 @@ const MET_DEFAULTS = { Walk: 3.5, Pilates: 4.5, Yoga: 4.0, Run: 10, Strength: 5,
 const RPE_LABEL = ["", "Very Easy", "Easy", "Moderate", "Moderate", "Hard", "Hard", "Very Hard", "Very Hard", "Max", "Max"];
 const STORAGE_KEY = "leigh-training-log:sessions";
 const SETTINGS_KEY = "leigh-training-log:settings";
-const APP_VERSION = "0.52";  // bump this on every deploy so you can verify the right file is live
+const APP_VERSION = "0.54";  // bump this on every deploy so you can verify the right file is live
 
 // Structured workouts — rendered first in the Strength Exercises sheet.
 // To update: edit this constant and redeploy.
 const WORKOUTS = [
   {
     icon: "⏱️",
-    title: "Full Body (40mins)",
-    note: "45s on · 15s off · 40 moves",
-    met: 6.65,
+    title: "Full Body (50mins)",
+    note: "50s on · 10s off · 50 moves",
+    met: 8,
     sections: [
-      { title: "Cardio", moves: ["Boxing", "Jumping jacks", "Lateral Shuffle", "Mountain Climbers", "High Knees", "Boxing", "Burpees", "Rest"] },
-      { title: "Legs",   moves: ["Wall sit", "Squat", "Step ups", "Squat pulse", "Walking Lunges", "Calf raises", "Squat", "Rest"] },
-      { title: "Upper",  moves: ["Boxing", "Push-ups", "Dips", "Plank shoulder taps", "Pushup", "Mountain Climbers", "Boxing", "Rest"] },
-      { title: "Glutes", moves: ["RS knee-ankle taps", "RS Leg Raises", "RS Circles", "LS knee-ankle taps", "LS Leg Raises", "LS Circles", "Glute Bridge", "Rest"] },
-      { title: "Abs",    moves: ["Flutterkicks", "Bicycle", "Russian Twists", "Ankle taps", "Side plank R", "Side Plank L", "High plank", "Crunches"] },
+      { title: "Cardio", moves: ["Boxing", "Jumping jacks", "Lateral Shuffle", "Mountain Climbers", "High Knees", "Boxing", "Burpees", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Legs",   moves: ["Wall sit", "Squat", "Step ups", "Squat pulse", "Walking Lunges", "Calf raises", "Squat", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Upper",  moves: ["Boxing", "Push-ups", "Dips", "Plank shoulder taps", "Pushup", "Mountain Climbers", "Boxing", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Glutes", moves: ["RS knee-ankle taps", "RS Leg Raises", "RS Circles", "LS knee-ankle taps", "LS Leg Raises", "LS Circles", "Glute Bridge", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Abs",    moves: ["Flutterkicks", "Bicycle", "Russian Twists", "Ankle taps", "Side plank R", "Side Plank L", "High plank", "Crunches", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)"] },
     ],
   },
   {
     icon: "❤️",
-    title: "Cardio (24mins)",
-    note: "45s on · 15s off · 24 moves",
-    met: 6.65,
+    title: "Cardio (30mins)",
+    note: "50s on · 10s off · 30 moves",
+    met: 8,
     sections: [
-      { title: "Set 1", moves: ["Burpees", "Boxing", "Mountain Climbers", "Jumping Jacks", "Lateral Shuffle", "Burpees", "High Knees", "Rest"] },
-      { title: "Set 2", moves: ["Star Jumps", "Squat Jumps", "Lateral Shuffle", "Mountain Climbers", "Boxing", "Burpees", "High Knees", "Rest"] },
-      { title: "Set 3", moves: ["Flutter Kicks", "Bicycle Crunch", "Russian Twists", "Heel Taps", "Mountain Climbers", "Side Plank R", "Side Plank L", "Plank"] },
+      { title: "Set 1", moves: ["Burpees", "Boxing", "Mountain Climbers", "Jumping Jacks", "Lateral Shuffle", "Burpees", "High Knees", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 2", moves: ["Star Jumps", "Squat Jumps", "Lateral Shuffle", "Mountain Climbers", "Boxing", "Burpees", "High Knees", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 3", moves: ["Flutter Kicks", "Bicycle Crunch", "Russian Twists", "Heel Taps", "Mountain Climbers", "Side Plank R", "Side Plank L", "Plank", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)"] },
     ],
   },
   {
     icon: "🦵",
-    title: "Lower (24mins)",
-    note: "45s on · 15s off · 24 moves",
-    met: 6.65,
+    title: "Lower (30mins)",
+    note: "50s on · 10s off · 30 moves",
+    met: 8,
     sections: [
-      { title: "Set 1", moves: ["Squat", "Walking Lunges", "Squat Pulse", "Step Ups", "Reverse Lunge", "Calf Raises", "Wall Sit", "Rest"] },
-      { title: "Set 2", moves: ["RS Heel Knee Tap", "RS Leg Raises", "RS Leg Circles", "LS Heel Knee Tap", "LS Leg Raises", "LS Leg Circles", "Glute Bridge", "Rest"] },
-      { title: "Set 3", moves: ["RS Heel Knee Tap", "RS Leg Raises", "RS Leg Circles", "LS Heel Knee Tap", "LS Leg Raises", "LS Leg Circles", "Walking Lunges", "Wall Sit"] },
+      { title: "Set 1", moves: ["Squat", "Walking Lunges", "Squat Pulse", "Step Ups", "Reverse Lunge", "Calf Raises", "Wall Sit", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 2", moves: ["RS Heel Knee Tap", "RS Leg Raises", "RS Leg Circles", "LS Heel Knee Tap", "LS Leg Raises", "LS Leg Circles", "Glute Bridge", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 3", moves: ["RS Heel Knee Tap", "RS Leg Raises", "RS Leg Circles", "LS Heel Knee Tap", "LS Leg Raises", "LS Leg Circles", "Walking Lunges", "Wall Sit", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)"] },
     ],
   },
   {
     icon: "🔥",
-    title: "Core (24mins)",
-    note: "45s on · 15s off · 24 moves",
-    met: 6.65,
+    title: "Core (30mins)",
+    note: "50s on · 10s off · 30 moves",
+    met: 8,
     sections: [
-      { title: "Set 1", moves: ["Plank", "Bicycle Crunch", "Russian Twists", "Flutter Kicks", "Heel Taps", "Crunches", "Plank", "Rest"] },
-      { title: "Set 2", moves: ["Side Plank R", "Side Plank L", "Dead Bug", "V-Sit Hold", "Mountain Climbers", "Low Plank", "Heel Taps", "Rest"] },
-      { title: "Set 3", moves: ["Push-Ups", "Plank Shoulder Taps", "Dips", "Mountain Climbers", "Boxing", "Push-Ups", "Superman Hold", "Plank"] },
+      { title: "Set 1", moves: ["Plank", "Bicycle Crunch", "Russian Twists", "Flutter Kicks", "Heel Taps", "Crunches", "Plank", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 2", moves: ["Side Plank R", "Side Plank L", "Dead Bug", "V-Sit Hold", "Mountain Climbers", "Low Plank", "Heel Taps", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 3", moves: ["Push-Ups", "Plank Shoulder Taps", "Dips", "Mountain Climbers", "Boxing", "Push-Ups", "Superman Hold", "Plank", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)"] },
     ],
   },
   {
     icon: "💪",
-    title: "Upper (24mins)",
-    note: "45s on · 15s off · 24 moves",
-    met: 6.65,
+    title: "Upper (30mins)",
+    note: "50s on · 10s off · 30 moves",
+    met: 8,
     sections: [
-      { title: "Set 1", moves: ["Push-Ups", "Boxing", "Dips", "Burpees", "Supermans", "YTW", "Boxing", "Rest"] },
-      { title: "Set 2", moves: ["Superman Hold", "Bear Crawl Hold", "Plank Shoulder Taps", "Inchworm", "Push-Ups", "Boxing", "Dips", "Rest"] },
-      { title: "Set 3", moves: ["Plank", "Bicycle Crunch", "Russian Twists", "Flutter Kicks", "Heel Taps", "Side Plank R", "Side Plank L", "Plank"] },
+      { title: "Set 1", moves: ["Push-Ups", "Boxing", "Dips", "Burpees", "Supermans", "YTW", "Boxing", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 2", moves: ["Superman Hold", "Bear Crawl Hold", "Plank Shoulder Taps", "Inchworm", "Push-Ups", "Boxing", "Dips", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)", "Rest"] },
+      { title: "Set 3", moves: ["Plank", "Bicycle Crunch", "Russian Twists", "Flutter Kicks", "Heel Taps", "Side Plank R", "Side Plank L", "Plank", "YOU CHOOSE (or plank)", "YOU CHOOSE (or plank)"] },
     ],
   },
 ];
@@ -1448,13 +1453,15 @@ function render() {
   app.innerHTML = workoutOverlay + `
     <div class="header">
       <div class="title">
-        <span>TRACKR</span>
+        <div class="title-left">
+          <span class="title-name">TRACKR</span>
+          <span class="title-meta">${state.sessions.length} session${state.sessions.length === 1 ? "" : "s"} &nbsp;<span style="opacity:0.5;">v${APP_VERSION}</span></span>
+        </div>
         <div class="title-actions">
           <button class="menu-btn" id="openWorkouts" aria-label="Workouts">⏱</button>
           <button class="menu-btn" id="openMenu" aria-label="Menu">⋯</button>
         </div>
       </div>
-      <div class="title-meta">${state.sessions.length} session${state.sessions.length === 1 ? "" : "s"} tracked <span style="opacity:0.5; margin-left:6px;">v${APP_VERSION}</span></div>
       <div class="tabs" role="tablist">
         <button class="tab ${state.view === "log" ? "active" : ""}" data-view="log" role="tab">LOG SESSION</button>
         <button class="tab ${state.view === "history" ? "active" : ""}" data-view="history" role="tab">HISTORY</button>
@@ -2370,28 +2377,52 @@ function flattenWorkout(workout) {
   workout.sections.forEach(sec => sec.moves.forEach(move => flat.push({ section: sec.title, move })));
   return flat;
 }
+// Move slot durations:
+//   Normal move: 60s (50s work + 10s rest)
+//   Move immediately before a "Rest" slot: 50s (work only — avoids double rest)
+//   Dedicated "Rest" slot: 60s (shown as one combined countdown)
+function moveDuration(flat, idx) {
+  if (flat[idx].move.toLowerCase() === "rest") return 60;
+  if (flat[idx + 1]?.move?.toLowerCase() === "rest") return 50;
+  return 60;
+}
 function computeWorkoutState() {
   const t = state.workoutTimer;
   if (!t) return null;
-  const totalMoves = t.totalMoves || 40;
+  const workout = WORKOUTS[t.workoutIdx] || WORKOUTS[0];
+  const flat = flattenWorkout(workout);
   const now = t.pausedAt || Date.now();
   const elapsedMs = now - t.startedAt - t.totalPausedMs;
   const elapsedSec = elapsedMs / 1000;
   if (elapsedSec < 0) {
     return { pending: true, countdown: Math.max(1, Math.ceil(-elapsedSec)), elapsedSec };
   }
-  const moveIdx = Math.floor(elapsedSec / 60);
-  if (moveIdx >= totalMoves) return { done: true, moveIdx: totalMoves, elapsedSec };
-  const intoMove = elapsedSec % 60;
-  const phase = intoMove < 45 ? "work" : "rest";
-  const phaseDur = phase === "work" ? 45 : 15;
-  const phaseElapsed = phase === "work" ? intoMove : intoMove - 45;
-  return {
-    done: false, moveIdx, phase,
-    phaseRemaining: Math.max(0, Math.ceil(phaseDur - phaseElapsed)),
-    phasePct: (phaseElapsed / phaseDur) * 100,
-    elapsedSec,
-  };
+  let cumTime = 0;
+  for (let i = 0; i < flat.length; i++) {
+    const dur = moveDuration(flat, i);
+    if (cumTime + dur > elapsedSec) {
+      const intoMove = elapsedSec - cumTime;
+      const isRestSlotMove = flat[i].move.toLowerCase() === "rest";
+      let phase, phaseDur, phaseElapsed;
+      if (isRestSlotMove) {
+        phase = "work"; phaseDur = 60; phaseElapsed = intoMove;
+      } else if (dur === 50) {
+        phase = "work"; phaseDur = 50; phaseElapsed = intoMove;
+      } else {
+        phase = intoMove < 50 ? "work" : "rest";
+        phaseDur = phase === "work" ? 50 : 10;
+        phaseElapsed = phase === "work" ? intoMove : intoMove - 50;
+      }
+      return {
+        done: false, moveIdx: i, phase,
+        phaseRemaining: Math.max(0, Math.ceil(phaseDur - phaseElapsed)),
+        phasePct: (phaseElapsed / phaseDur) * 100,
+        elapsedSec, intoMove, moveDur: dur,
+      };
+    }
+    cumTime += dur;
+  }
+  return { done: true, moveIdx: flat.length, elapsedSec };
 }
 async function acquireWorkoutWakeLock() {
   if (!("wakeLock" in navigator)) return;
@@ -2433,7 +2464,7 @@ async function startWorkout(workoutIdx = 0) {
   // Set state BEFORE the await — guard blocks re-entry for the duration.
   state.workoutTimer = {
     workoutIdx, totalMoves,
-    startedAt: Date.now() + 2000,
+    startedAt: Date.now() + 5000,
     totalPausedMs: 0, pausedAt: null,
   };
   workoutLastVibKey = "PENDING";
@@ -2498,7 +2529,7 @@ function logWorkoutSession(elapsedMin, completed) {
       duration: String(finalMin),
       type: workout.title,
       details: completed
-        ? `Completed all ${totalMoves} moves · 45s on / 15s off`
+        ? `Completed all ${totalMoves} moves · 50s on / 10s off`
         : `Ended at move ${Math.min(totalMoves, elapsedMin)} of ${totalMoves}`,
       calories,
     },
@@ -2568,12 +2599,12 @@ function scheduleWorkoutTick() {
     }
 
     // Two "bip" warnings at 58s and 59s of each 60s slot.
-    const intoMove = c.elapsedSec - c.moveIdx * 60;
-    if (intoMove >= 58 && intoMove < 59) {
+    const _moveDur = c.moveDur || 60;
+    if (c.intoMove >= _moveDur - 2 && c.intoMove < _moveDur - 1) {
       const k = `bip1-${c.moveIdx}`;
       if (!workoutFiredBeeps.has(k)) { workoutFiredBeeps.add(k); playBeep(800, 110); }
     }
-    if (intoMove >= 59 && intoMove < 60) {
+    if (c.intoMove >= _moveDur - 1 && c.intoMove < _moveDur) {
       const k = `bip2-${c.moveIdx}`;
       if (!workoutFiredBeeps.has(k)) { workoutFiredBeeps.add(k); playBeep(800, 110); }
     }
@@ -2610,9 +2641,8 @@ function renderWorkoutOverlay() {
   // True during the 15s rest between regular exercises (not a dedicated Rest slot)
   const isRestPhase = c.phase === "rest" && !isRestSlot;
   // Dedicated Rest slots show a combined 60s countdown (45s work + 15s rest merged)
-  const intoMove = c.elapsedSec - c.moveIdx * 60;
-  const restSlotRemaining = Math.max(0, Math.ceil(60 - intoMove));
-  const restSlotPct = Math.min(100, (intoMove / 60) * 100);
+  const restSlotRemaining = Math.max(0, Math.ceil(60 - c.intoMove));
+  const restSlotPct = Math.min(100, (c.intoMove / 60) * 100);
   const phaseClass = (c.phase === "work" && !isRestSlot) ? "work" : "rest";
   const countdown = isRestSlot ? restSlotRemaining : c.phaseRemaining;
   const progressPct = isRestSlot ? restSlotPct : c.phasePct;
