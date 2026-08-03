@@ -860,7 +860,7 @@ const MET_DEFAULTS = { Walk: 3.5, Pilates: 4.5, Yoga: 4.0, Run: 10, Strength: 5,
 const RPE_LABEL = ["", "Very Easy", "Easy", "Moderate", "Moderate", "Hard", "Hard", "Very Hard", "Very Hard", "Max", "Max"];
 const STORAGE_KEY = "leigh-training-log:sessions";
 const SETTINGS_KEY = "leigh-training-log:settings";
-const APP_VERSION = "0.59";  // bump this on every deploy so you can verify the right file is live
+const APP_VERSION = "0.60";  // bump this on every deploy so you can verify the right file is live
 
 // Structured workouts — rendered first in the Strength Exercises sheet.
 // To update: edit this constant and redeploy.
@@ -2705,6 +2705,13 @@ function cleanupWorkout() {
   if (workoutTickHandle) { clearInterval(workoutTickHandle); workoutTickHandle = null; }
   releaseWorkoutWakeLock();
   stopSilentKeepAlive();
+  // Close and discard the AudioContext so the next workout creates a brand-new
+  // one inside the new gesture. Reusing a stale/suspended context across
+  // workouts is what causes iOS to silently drop the resume() call.
+  if (workoutAudioCtx) {
+    try { workoutAudioCtx.close(); } catch (e) {}
+    workoutAudioCtx = null;
+  }
   // Pause the unmute hack so it doesn't drain battery when idle.
   try { const u = document.getElementById("iosUnmuteHack"); if (u) u.pause(); } catch (e) {}
   render();
