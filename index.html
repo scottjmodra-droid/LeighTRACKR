@@ -709,7 +709,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
   font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 13px;
 }
 /* Full workout peek overlay */
-.workout-overlay.workout-peek { overflow: hidden; padding-top: calc(16px + env(safe-area-inset-top)); gap: 10px; }
+.workout-overlay.workout-peek { overflow: hidden; padding-top: calc(16px + env(safe-area-inset-top)); padding-bottom: 0; gap: 10px; }
 .workout-peek-header {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 6px; flex-shrink: 0;
@@ -1328,6 +1328,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
     margin-top:8px;
   }
   .reach-overlay .preview-item .pi-sides-tag {font-size:10.5px;color:var(--ink-faint);margin-left:2px;white-space:nowrap;}
+  .reach-overlay .preview-item .pi-order {
+    display:flex;flex-direction:column;gap:3px;align-self:center;
+  }
+  .reach-overlay .preview-item .pi-order button {
+    background:rgba(255,255,255,0.08);border:none;color:var(--ink-soft);
+    border-radius:5px;width:26px;height:26px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;cursor:pointer;line-height:1;
+  }
+  .reach-overlay .preview-item .pi-order button:disabled {opacity:0.18;pointer-events:none;}
   .reach-overlay .preview-item button.pi-remove {
     background:none;border:none;color:#A5493C;
     font-size:12.5px;font-weight:600;
@@ -1421,7 +1431,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
     position:absolute;inset:0;
     z-index:-1;
     background-color:var(--moss-deep);
-    background-size:cover;
+    background-size:contain;
     background-repeat:no-repeat;
     background-position:center;
     opacity:0;
@@ -1491,9 +1501,23 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
     font-weight:600;
   }
   .reach-overlay .play-body .up-next {
-    font-size:13.5px;
+    font-size:17px;
     color:#A9B79E;
-    margin-top:2px;
+    margin-top:6px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+  }
+  .reach-overlay .reach-count-badge {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px;
+    letter-spacing:2.5px;
+    color:var(--moss);
+    background:rgba(139,174,80,0.15);
+    border-radius:20px;
+    padding:2px 12px;
   }
   .reach-overlay .rest-how {
     text-align:left;
@@ -1645,7 +1669,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
     accent-color:var(--moss);
     flex-shrink:0;
   }
-  .reach-overlay .theme-seg {display:flex;gap:6px;}
+  .reach-overlay .theme-seg {display:none;}
   .reach-overlay .theme-seg-btn {
     border:1px solid var(--line);
     background:var(--bg-alt);
@@ -3524,9 +3548,11 @@ async function startWorkout(workoutIdx = 0) {
     startSilentKeepAlive(workoutAudioCtx);
   }
   render();
-  playBeep(800, 200);
-  navigator.vibrate?.(60);
+  playBeep(800, 200); navigator.vibrate?.(60);
   setTimeout(() => { playBeep(800, 200); navigator.vibrate?.(60); }, 1000);
+  setTimeout(() => { playBeep(800, 200); navigator.vibrate?.(60); }, 2000);
+  setTimeout(() => { playBeep(800, 200); navigator.vibrate?.(60); }, 3000);
+  setTimeout(() => { playBeep(800, 200); navigator.vibrate?.(60); }, 4000);
 }
 function pauseWorkout() {
   if (!state.workoutTimer || state.workoutTimer.pausedAt) return;
@@ -4472,20 +4498,7 @@ let reachSettings = reach_loadSettings();
 
 // The <head> script sets data-theme="light" before first paint if that was
 // the stored choice, so this just keeps the segmented control in sync.
-function reach_currentTheme(){
-  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-}
-function reach_applyThemeChoice(theme){
-  document.documentElement.setAttribute('data-theme', theme);
-  try{ localStorage.setItem('reach_theme', theme); }catch(e){}
-  document.getElementById('reach-themeLightBtn').classList.toggle('active', theme==='light');
-  document.getElementById('reach-themeDarkBtn').classList.toggle('active', theme==='dark');
-}
-document.getElementById('reach-themeLightBtn').addEventListener('click', ()=> reach_applyThemeChoice('light'));
-document.getElementById('reach-themeDarkBtn').addEventListener('click', ()=> reach_applyThemeChoice('dark'));
-
 function reach_openSettingsSheet(){
-  reach_applyThemeChoice(reach_currentTheme());
   document.getElementById('reach-volumeSlider').value = reachSettings.beepVolume;
   document.getElementById('reach-volumeValue').textContent = reachSettings.beepVolume===0 ? 'Muted' : reachSettings.beepVolume + '%';
   document.getElementById('reach-readySecondsInput').value = reachSettings.readySeconds;
@@ -4731,7 +4744,7 @@ function reach_ensureAudioGraph(ctx){
 // that made the drum louder/punchier in the first place — 100% keeps the
 // old fixed loudness exactly, 0% is a full mute.
 function reach_applyBeepVolume(){
-  if(reachMasterGain) reachMasterGain.gain.value = 5.0 * (reachSettings.beepVolume/100);
+  if(reachMasterGain) reachMasterGain.gain.value = 10.0 * (reachSettings.beepVolume/100);
 }
 function reach_drumOutput(ctx){
   reach_ensureAudioGraph(ctx);
@@ -4790,7 +4803,7 @@ function reachPlayDrum(){
       osc.frequency.setValueAtTime(170, t0);
       osc.frequency.exponentialRampToValueAtTime(55, t0 + 0.22);
       gain.gain.setValueAtTime(0.0001, t0);
-      gain.gain.exponentialRampToValueAtTime(1.3, t0 + 0.012);
+      gain.gain.exponentialRampToValueAtTime(2.6, t0 + 0.012);
       gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.32);
       osc.connect(gain).connect(reach_drumOutput(reachAudioCtx));
       osc.start(t0);
@@ -4812,7 +4825,7 @@ function reachPlayDrumTriple(){
         osc.frequency.setValueAtTime(170, t0);
         osc.frequency.exponentialRampToValueAtTime(55, t0 + 0.14);
         gain.gain.setValueAtTime(0.0001, t0);
-        gain.gain.exponentialRampToValueAtTime(1.3, t0 + 0.01);
+        gain.gain.exponentialRampToValueAtTime(2.6, t0 + 0.01);
         gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.2);
         osc.connect(gain).connect(reach_drumOutput(reachAudioCtx));
         osc.start(t0);
@@ -4834,9 +4847,9 @@ let reach_isPaused = false;
 let reach_lastTick = null;
 let reach_sessionComplete = false;
 
-function reach_buildSequence(items){
+function reach_buildSequence(items, order){
   const seq = [];
-  const ids = Object.keys(items);
+  const ids = order || Object.keys(items);
   ids.forEach(id=>{
     const s = STRETCHES.find(x=>x.id==id);
     const min = items[id];
@@ -4865,11 +4878,13 @@ document.getElementById('reach-playBtn').addEventListener('click', ()=>{
 // fine-tune a session: change a duration, remove a stretch, or add another,
 // all before hitting Play.
 let reach_previewItems = {};
+let reach_previewOrder = [];
 let reach_previewSyncBuildTab = true;
 let reach_previewAddOpen = false;
 
 function reach_openPreview(items, syncBuildTab=true){
   reach_previewItems = {...items};
+  reach_previewOrder = Object.keys(items).map(String);
   reach_previewSyncBuildTab = syncBuildTab;
   reach_previewAddOpen = false;
   reach_syncPreviewChange();
@@ -4891,7 +4906,7 @@ function reach_syncPreviewChange(){
 }
 
 function reach_renderPreviewList(){
-  const ids = Object.keys(reach_previewItems);
+  const ids = reach_previewOrder;
   const mins = reach_sessionMinutesFor(reach_previewItems);
   document.getElementById('reach-previewTotal').textContent = ids.length
     ? `${mins} min · ${ids.length} stretch${ids.length===1?'':'es'}`
@@ -4901,7 +4916,7 @@ function reach_renderPreviewList(){
   if(ids.length===0){
     itemsList.innerHTML = `<div class="preview-empty">Add a stretch below to build this session.</div>`;
   } else {
-    itemsList.innerHTML = ids.map(id=>{
+    itemsList.innerHTML = ids.map((id, idx)=>{
       const s = STRETCHES.find(x=>x.id==id);
       const min = reach_previewItems[id];
       const chips = DURATIONS.map(d=>{
@@ -4909,6 +4924,8 @@ function reach_renderPreviewList(){
         return `<button class="dur-chip ${active}" data-id="${id}" data-min="${d}">${d} min${s.sides?'/side':''}</button>`;
       }).join('');
       const img = STRETCH_IMAGES[s.id];
+      const isFirst = idx === 0;
+      const isLast  = idx === ids.length - 1;
       return `<div class="preview-item">
         ${img ? `<img class="pi-thumb" src="${img.thumb}" alt="">` : ''}
         <div class="pi-main">
@@ -4918,7 +4935,11 @@ function reach_renderPreviewList(){
             ${s.sides ? '' : '<span class="pi-sides-tag">single hold</span>'}
           </div>
         </div>
-        <button class="pi-remove" data-id="${id}">Remove</button>
+        <div class="pi-order">
+          <button data-move-up="${id}" ${isFirst ? 'disabled' : ''} title="Move up">▲</button>
+          <button data-move-down="${id}" ${isLast  ? 'disabled' : ''} title="Move down">▼</button>
+        </div>
+        <button class="pi-remove" data-id="${id}">✕</button>
       </div>`;
     }).join('');
     itemsList.querySelectorAll('.dur-chip').forEach(btn=>{
@@ -4929,8 +4950,29 @@ function reach_renderPreviewList(){
     });
     itemsList.querySelectorAll('.pi-remove').forEach(btn=>{
       btn.addEventListener('click', ()=>{
+        reach_previewOrder = reach_previewOrder.filter(x => x !== btn.dataset.id);
         delete reach_previewItems[btn.dataset.id];
         reach_syncPreviewChange();
+      });
+    });
+    itemsList.querySelectorAll('[data-move-up]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.dataset.moveUp;
+        const i = reach_previewOrder.indexOf(id);
+        if(i > 0){
+          [reach_previewOrder[i-1], reach_previewOrder[i]] = [reach_previewOrder[i], reach_previewOrder[i-1]];
+          reach_syncPreviewChange();
+        }
+      });
+    });
+    itemsList.querySelectorAll('[data-move-down]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.dataset.moveDown;
+        const i = reach_previewOrder.indexOf(id);
+        if(i < reach_previewOrder.length - 1){
+          [reach_previewOrder[i], reach_previewOrder[i+1]] = [reach_previewOrder[i+1], reach_previewOrder[i]];
+          reach_syncPreviewChange();
+        }
       });
     });
   }
@@ -4961,7 +5003,9 @@ function reach_renderPreviewAddPanel(){
   }).join('');
   panel.querySelectorAll('button.add').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      reach_previewItems[btn.dataset.id] = 1;
+      const id = String(btn.dataset.id);
+      reach_previewItems[id] = 1;
+      if(!reach_previewOrder.includes(id)) reach_previewOrder.push(id);
       reach_syncPreviewChange();
     });
   });
@@ -4972,10 +5016,10 @@ document.getElementById('reach-previewAddToggle').addEventListener('click', ()=>
   reach_renderPreviewList();
 });
 document.getElementById('reach-closePreviewBtn').addEventListener('click', reach_closePreview);
-document.getElementById('reach-startPlayBtn').addEventListener('click', ()=> reach_startPlayback(reach_previewItems));
+document.getElementById('reach-startPlayBtn').addEventListener('click', ()=> reach_startPlayback(reach_previewItems, reach_previewOrder));
 
-async function reach_startPlayback(items){
-  const built = reach_buildSequence(items);
+async function reach_startPlayback(items, order){
+  const built = reach_buildSequence(items, order);
   if(!built.length) return;
 
   // ---- synchronous audio unlock: must happen before any await ----
@@ -5115,17 +5159,20 @@ function reach_renderSegmentUI(seg){
   }
 
   const upNext = document.getElementById('reach-upNext');
+  const totalStretches = reach_sequence.filter(x => !x.rest && !x.ready).length;
+  const completedStretches = reach_sequence.slice(0, reach_seqIndex).filter(x => !x.rest && !x.ready).length;
+  const countBadge = `<span class="reach-count-badge">${completedStretches} / ${totalStretches} COMPLETE</span>`;
   if((seg.rest || seg.ready) && upcoming){
     const steps = (upcoming.stretch.how || []).map((s,i)=>`
       <div class="rest-how-step">
         <div class="rest-how-step-num">${i+1}</div>
         <div>${s}</div>
       </div>`).join('');
-    upNext.innerHTML = steps ? `<div class="rest-how">${steps}</div>` : '';
+    upNext.innerHTML = countBadge + (steps ? `<div class="rest-how">${steps}</div>` : '');
   } else {
-    upNext.textContent = upcoming
-      ? `Next: ${upcoming.stretch.name}${upcoming.side ? ' — '+upcoming.side : ''}`
-      : 'Last one';
+    upNext.innerHTML = countBadge + `<span>${upcoming
+      ? 'Next: ' + upcoming.stretch.name + (upcoming.side ? ' — ' + upcoming.side : '')
+      : 'Last one'}</span>`;
   }
 }
 
@@ -5424,14 +5471,6 @@ document.getElementById('reach-closeReachBtn').addEventListener('click', () => {
 <div class="play-details-sheet" id="reach-detailsSheet"></div>
 <div class="play-details-sheet settings-sheet" id="reach-settingsSheet">
   <h3>Settings</h3>
-
-  <div class="settings-row">
-    <div class="settings-label">Appearance</div>
-    <div class="theme-seg">
-      <button class="theme-seg-btn" id="reach-themeLightBtn">Light</button>
-      <button class="theme-seg-btn" id="reach-themeDarkBtn">Dark</button>
-    </div>
-  </div>
 
   <div class="settings-row">
     <div class="settings-label">Beep volume</div>
